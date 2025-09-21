@@ -5,10 +5,11 @@ const page = async ({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams:  Promise<{[key: string]: string | string[] | undefined }>;
 }) => {
   const { slug } = await params;
-  const query = searchParams?.key;
+  const q = await searchParams;
+  const query = q?.key;
 
   return (
     <div>
@@ -21,10 +22,9 @@ const page = async ({
           <h3>Query is {query}</h3>
         )
       ) : (
-        <h3></h3>
+        <></>
       )}
     </div>
   );
 };
-
 export default page;
